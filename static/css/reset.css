@@ -1,0 +1,17 @@
+a {
+  text-decoration: none!important;
+}
+ul,h3,h5,p {
+    margin: 0;
+    padding: 0;
+}
+body {
+  background: #f1f2f0;
+}
+ul {
+  list-style: none;
+}
+
+.main  .row {
+  margin-bottom: 20px;
+}
