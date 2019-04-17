@@ -31,8 +31,8 @@
 export default {
   data () {
     return {
-      usernameModel: '',
-      passwordModel: '',
+      usernameModel: '@',
+      passwordModel: '123',
       errorText: ''
     }
   },
@@ -83,13 +83,17 @@ export default {
       }
       else {
         this.errorText = ''
-        this.$http.get('api/login')
-        .then((res) => {
-          this.$emit('has-log', res.data)
-        }, (error) => {
-          console.log(error)
-        })
+        // 获取用户信息
+        this.$store.dispatch('fetchUser')
+         this.$emit('has-log')
+        // this.$http.get('api/login')
+        // .then((res) => {
+        //   this.$emit('has-log', res.data)
+        // }, (error) => {
+        //   console.log(error)
+        // })
       }
+      // console.log('login')
     }
   }
 }

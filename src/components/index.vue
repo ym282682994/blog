@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <my-head @my-evet="showDialog" @reg-evet="showRegDialog" :username = 'username'></my-head>
+    <my-head @on-quit="isQuit" @my-evet="showDialog" @reg-evet="showRegDialog" :username = 'username'></my-head>
 
     <!-- <index-main></index-main> -->
     
@@ -19,6 +19,18 @@
 
     <dialog-show :isShow="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
       <reg-form></reg-form>
+    </dialog-show>
+
+    <dialog-show :isShow="loginOk"
+      @on-close="closeDialog('loginOk')"
+    >
+        用户登录成功
+    </dialog-show>
+
+      <dialog-show :isShow="onquit"
+      @on-close="closeDialog('onquit')"
+    >
+      用户退出登录
     </dialog-show>
   </div>
 </template>
@@ -39,12 +51,22 @@ export default {
     logForm,
     regForm
   },
+  computed: {
+     // 1.0获取state中的orderlist
+     username() {
+      // console.log(this.$store.getters.getUserName, 1)
+      // 获取用户名
+       return this.$store.getters.getUserName; 
+     }
+  },
   data() {
     return {
       msg: 'index',
       isShowlogDialog: false,
       isShowRegDialog: false,
-      username: '',
+      loginOk: false,
+      onquit: false,
+      // username: '',
       articleId: '', // indexMain 传递过来的文章Id
       datas: {
         'wzAraay': [
@@ -155,8 +177,9 @@ export default {
     },
     hasLog( data ) {
       console.log(data)
-      this.username = data.username;
+      // this.username = data.username;
       this.closeDialog('isShowlogDialog')
+      this.loginOk = true;
     },
     myEventFun() {
       console.log('foot to emit-evnet')
@@ -167,6 +190,11 @@ export default {
     },
     getArtcle(id) { // 获取indexMain 文章id, 发送给 article
       this.articleId = id;
+    },
+    isQuit() {
+      // 退出登录
+      console.log('退出')
+      this.onquit = true;
     }
   },
   mounted() {

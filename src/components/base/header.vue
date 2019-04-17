@@ -8,7 +8,9 @@
             <span v-if="username === ''"><a href="javascript:;" @click="showlogDialog">用户登录</a></span>
             <span v-if="username !== ''"><a href="javascript:;">{{username}}</a></span>
             <span>|</span>
-            <span v-if="username === ''"><a href="javascript:;" @click="showregDialog">注册</a></span>
+            <!-- <span v-if="username === ''"><a href="javascript:;" @click="showregDialog">注册</a></span> -->
+            <span v-if="username === ''"><a href="javascript:;">注册</a></span>
+            
             <span v-if="username !== ''"><a href="javascript:;" @click='quit'>退出</a></span>
         </div>
       </div>
@@ -98,7 +100,9 @@ export default {
       this.$emit('reg-evet', 'showRegDialog')
     },
     quit() {
-      this.username = '';
+      // this.username = '';
+      this.$store.commit('getUser', '')
+      this.$emit('on-quit')
     },
     showCollapse () {
       // console.log(this.$refs.collapse.style.class)
